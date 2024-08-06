@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { readFromFile, readAndAppend } = require('../../helpers/fsUtils');
 const uuid = require('../../helpers/uuid');
 const path = require("path")
-const notesPath = path.join(__dirname, "../../db/notes.json")
+const notesPath = path.join(__dirname, "../../db/db.json")
 const fs = require("fs")
 
 router.get('/', (req, res) => {
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
         const data = fs.readFileSync(notesPath);
         const notesArray = JSON.parse(data);
         notesArray.push(newNote);
-        fs.writeFile('./db/notes.json', JSON.stringify(notesArray, null, 4), (err) =>
+        fs.writeFile('./db/db.json', JSON.stringify(notesArray, null, 4), (err) =>
             err ? console.error(err) : console.info(`Notes added`))
         
         res.json(`Note added successfully`);
