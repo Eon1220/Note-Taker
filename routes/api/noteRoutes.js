@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
         fs.writeFile('./db/db.json', JSON.stringify(notesArray, null, 4), (err) =>
             err ? console.error(err) : console.info(`Notes added`))
         
-        res.json(`Note added successfully`);
+        res.json(`Note added`);
     } else {
         res.error('Error in adding note');
     }
