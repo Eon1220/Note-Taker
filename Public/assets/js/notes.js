@@ -9,7 +9,7 @@ const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 
 notes.get('/', (req, res) => {
     console.log('Requrest recieved for notes');
-    readFromFile('./public/assets/db/notes.json').then((data) => res.json(JSON.parse(data)));
+    readFromFile('./Public/assets/db/notes.json').then((data) => res.json(JSON.parse(data)));
 });
 
 notes.post('/', (req, res) => {
@@ -22,7 +22,7 @@ notes.post('/', (req, res) => {
             text,
             id: uuid()
         };
-        readAndAppend(newNote, './public/assets/db/notes.json');
+        readAndAppend(newNote, './Public/assets/db/notes.json');
         res.json('Added new note');
     }
     else{
@@ -35,7 +35,7 @@ notes.delete('/:term', (req, res) => {
 
     const targetId = req.params.term;
 
-    fs.readFile('./public/assets/db/notes.json', 'utf8', (err, data) => {
+    fs.readFile('./Public/assets/db/notes.json', 'utf8', (err, data) => {
         if(err){
             console.log(err);
         }
@@ -49,7 +49,7 @@ notes.delete('/:term', (req, res) => {
         }
     
         fileData.splice(targetIndex, 1);
-        fs.writeFile('./public/assets/db/notes.json', JSON.stringify(fileData), (writeErr) => 
+        fs.writeFile('./Public/assets/db/notes.json', JSON.stringify(fileData), (writeErr) => 
             writeErr
               ? console.error(writeErr)
               : console.info('Successfully updated reviews!'));
