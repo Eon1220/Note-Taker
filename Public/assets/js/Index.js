@@ -4,8 +4,9 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+const locationy = '/notes.html';
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname === locationy) {
   noteForm = document.querySelector('.note-form');
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -13,6 +14,8 @@ if (window.location.pathname === '/notes') {
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
   noteList = document.querySelectorAll('.list-container .list-group');
+  console.log("Im working");
+  
 }
 
 const show = (elem) => {
@@ -123,8 +126,10 @@ const handleRenderBtns = () => {
 
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
-  if (window.location.pathname === '/notes') {
+  if (window.location.pathname === locationy) {
     noteList.forEach((el) => (el.innerHTML = ''));
+    console.log("hello");
+    
   }
 
   let noteListItems = [];
@@ -168,18 +173,20 @@ const renderNoteList = async (notes) => {
     noteListItems.push(li);
   });
 
-  if (window.location.pathname === '/notes') {
+  if (window.location.pathname === locationy) {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
 
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname === locationy) {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   clearBtn.addEventListener('click', renderActiveNote);
   noteForm.addEventListener('input', handleRenderBtns);
+  console.log("im working too");
+  
 }
 
 getAndRenderNotes();
